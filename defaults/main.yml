@@ -1,2 +1,4 @@
 ---
 # defaults file for aem
+
+aem_type: author
