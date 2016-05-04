@@ -33,14 +33,15 @@ Role Variables
 Dependencies
 ------------
 
-`playlist.java` variables used: `java_packages: ['oracle-java8-installer', 'oracle-java8-set-default']`
+`playlist.java`, variables used: `java_packages: ['oracle-java8-installer', 'oracle-java8-set-default']`
 
 Example Playbook
 ----------------
-
+```
 - hosts: servers  
   roles:  
     - { role: ansible-role-aem, aem.license.customer: "Acme", aem.license.key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" }
+```
 
 License
 -------
@@ -52,5 +53,5 @@ Author Information
 
 Name: Ronald van Eede  
 Email: ronaldvaneede@gmail.com  
-Website: ronaldvaneede.me
+Website: ronaldvaneede.me  
 Twitter: @ronaldvaneede
