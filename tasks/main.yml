@@ -1,2 +1,82 @@
 ---
 # tasks file for aem
+
+- name: Copy AEM 6.1 jar file
+  copy:
+    src: "{{ aem_role_root }}/{{ aem.jar_location }}"
+    dest: /tmp/aem61.jar
+    mode: 0644
+    force: no
+
+- name: Create group
+  group:
+    name: "{{ aem.group }}"
+    state: present
+
+- name: Create user
+  user:
+    name: "{{ aem.user }}"
+    group: "{{ aem.group }}"
+
+- name: Create AEM directory
+  file:
+    path: "{{ aem.home }}"
+    owner: "{{ aem.user }}"
+    group: "{{ aem.group }}"
+    state: directory
+    mode: 0755
+
+- name: Unpack the Jar
+  become: yes
+  become_user: "{{ aem.user }}"
+  command: "java -jar /tmp/aem61.jar -b {{ aem.home }} -unpack"
+  args:
+    creates: "{{ aem.home }}/crx-quickstart/readme.txt"
+
+- name: Create the AEM license file
+  template:
+    src: "{{ aem_role_root }}/templates/aem/license.properties.j2"
+    dest: "{{ aem.home }}/license.properties"
+    owner: "{{ aem.user }}"
+    group: "{{ aem.group }}"
+    mode: 0755
+    force: no
+  notify:
+    - restart aem
+
+- name: Create the AEM start file
+  template:
+    src: "{{ aem_role_root }}/templates/aem/bin/start.j2"
+    dest: "{{ aem.home }}/crx-quickstart/bin/start"
+    owner: "{{ aem.user }}"
+    group: "{{ aem.group }}"
+    mode: 0755
+  notify:
+    - restart aem
+
+- name: Create init.d file
+  template:
+    src: "{{ aem_role_root }}/templates/init.d/aem.j2"
+    dest: "/etc/init.d/aem-{{ aem.instance_name }}"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Install packages
+  copy:
+    src: "{{ aem_role_root }}/files/{{ item }}"
+    dest: "{{ aem.home }}/crx-quickstart/install/{{ item }}"
+    owner: "{{ aem.user }}"
+    group: "{{ aem.group }}"
+    mode: 0644
+    force: no
+  with_items: "{{ aem.install.packages }}"
+  notify:
+    - restart aem
+
+- name: "Create aem-{{ aem.instance_name }} service"
+  service:
+    name: "aem-{{ aem.instance_name }}"
+    enabled: yes
+    state: started
+    sleep: 10

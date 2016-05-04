@@ -1,4 +1,21 @@
 ---
-# defaults file for aem
+aem_role_root: /vagrant/ansible/roles/ansible-role-aem
 
-aem_type: author
+aem:
+  type: author
+  home: /opt/aem/author
+  user: wcms
+  group: online
+  port: 4502
+  nosamplecontent: true
+  runmodes: author,test
+  instance_name: author
+  jar_location: /files/cq5-author-nobrowser-p4502.jar
+  license:
+    product: "Adobe Experience Manager"
+    customer: "Acme"
+    version: "6.1.0.20150507"
+    key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  install:
+    packages:
+      - aem61_sp1.zip

@@ -8,26 +8,41 @@ An Ansible role to provision AEM 6.x instances.
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+The AEM 6.1 binaries are not included and should be added by yourself.  
+Put them in the role's `/files` folder. You need a `cq5-author-nobrowser-p4502.jar` and an `aem61_sp1.zip` file.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+`aem_role_root` string, default: `/vagrant/ansible/roles/ansible-role-aem`, should not be needed, but need this for now for local development.  
+`aem.type` string, default: `author`  
+`aem.home` string, default: `/opt/aem/author`  
+`aem.user` string, default: `wcms`  
+`aem.group` string, default: `online`  
+`aem.port` string, default: `4502`  
+`aem.nosamplecontent` boolean, default: `true`  
+`aem.runmodes` string, default: `author,test`  
+`aem.instance_name` string, default: `author`  
+`aem.jar_location` string, default: `/files/cq5-author-nobrowser-p4502.jar `  
+`aem.license.product` string, default: `Adobe Experience Manager`  
+`aem.license.customer` string, default: `Acme`  
+`aem.license.version` string, default: `6.1.0.20150507`  
+`aem.license.key` string, default: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`  
+`aem.installpackages` array, default: `- aem61_sp1.zip`
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+`playlist.java` variables used: `java_packages: ['oracle-java8-installer', 'oracle-java8-set-default']`
 
 Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+    - hosts: servers  
+      roles:  
+        - { role: ansible-role-aem, aem.license.customer: "Acme", aem.license.key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" }
 
 License
 -------

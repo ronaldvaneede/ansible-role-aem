@@ -1,2 +1,6 @@
 ---
-# handlers file for aem
+
+- name: restart aem
+  service:
+    name: "aem-{{ aem.instance_name }}"
+    state: restarted
