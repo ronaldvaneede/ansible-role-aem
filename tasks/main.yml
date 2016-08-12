@@ -3,7 +3,7 @@
 
 - name: Copy AEM 6.1 jar file
   copy:
-    src: "{{ aem_role_root }}/{{ aem.jar_location }}"
+    src: "{{ aem.jar_location }}"
     dest: /tmp/aem61.jar
     mode: 0644
     force: no
