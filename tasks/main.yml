@@ -35,28 +35,28 @@
 
 - name: Create the AEM license file
   template:
-    src: "{{ aem_role_root }}/templates/aem/license.properties.j2"
+    src: "{{ aem.license_template }}"
     dest: "{{ aem.home }}/license.properties"
     owner: "{{ aem.user }}"
     group: "{{ aem.group }}"
     mode: 0755
     force: no
   notify:
-    - restart aem
+    - restart aem-{{ aem.instance_name }}
 
 - name: Create the AEM start file
   template:
-    src: "{{ aem_role_root }}/templates/aem/bin/start.j2"
+    src: "{{ aem.start_template }}"
     dest: "{{ aem.home }}/crx-quickstart/bin/start"
     owner: "{{ aem.user }}"
     group: "{{ aem.group }}"
     mode: 0755
   notify:
-    - restart aem
+    - restart aem-{{ aem.instance_name }}
 
 - name: Create init.d file
   template:
-    src: "{{ aem_role_root }}/templates/init.d/aem.j2"
+    src: "{{ aem.init_template }}"
     dest: "/etc/init.d/aem-{{ aem.instance_name }}"
     owner: root
     group: root
@@ -64,7 +64,7 @@
 
 - name: Install packages
   copy:
-    src: "{{ aem_role_root }}/files/{{ item }}"
+    src: "files/packages/{{ item }}"
     dest: "{{ aem.home }}/crx-quickstart/install/{{ item }}"
     owner: "{{ aem.user }}"
     group: "{{ aem.group }}"
@@ -72,7 +72,7 @@
     force: no
   with_items: "{{ aem.install.packages }}"
   notify:
-    - restart aem
+    - restart aem-{{ aem.instance_name }}
 
 - name: "Create aem-{{ aem.instance_name }} service"
   service:
