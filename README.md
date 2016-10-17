@@ -9,38 +9,37 @@ Requirements
 ------------
 
 The AEM 6.1 binaries are not included and should be added by yourself.  
-Put them in the role's `/files` folder. You need a `cq5-author-nobrowser-p4502.jar` and an `aem61_sp1.zip` file.
+Put them in the role's `/files` folder. You need a `cq5-author-nobrowser-p4502.jar` file with the default properties.
 
 Role Variables
 --------------
 
-`aem_role_root` string, default: `/vagrant/ansible/roles/ansible-role-aem`, should not be needed, but need this for now for local development.  
-`aem.type` string, default: `author`  
-`aem.home` string, default: `/opt/aem/author`  
-`aem.user` string, default: `wcms`  
-`aem.group` string, default: `online`  
-`aem.port` string, default: `4502`  
-`aem.nosamplecontent` boolean, default: `true`  
-`aem.runmodes` string, default: `author,test`  
-`aem.instance_name` string, default: `author`  
-`aem.jar_location` string, default: `/files/cq5-author-nobrowser-p4502.jar `  
+`aem.jarfile` string, default: `cq5-author-nobrowser-p4502.jar `  
+`aem.instance.name` string, default: `author`  
+`aem.instance.type` string, default: `author`  
+`aem.instance.home` string, default: `/opt/aem/author`  
+`aem.instance.user` string, default: `wcms`  
+`aem.instance.group` string, default: `online`  
+`aem.instance.port` string, default: `4502`  
+`aem.instance.nosamplecontent` boolean, default: `true`  
+`aem.instance.runmodes` string, default: `author,test`  
 `aem.license.product` string, default: `Adobe Experience Manager`  
 `aem.license.customer` string, default: `Acme`  
 `aem.license.version` string, default: `6.1.0.20150507`  
 `aem.license.key` string, default: `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`  
-`aem.installpackages` array, default: `- aem61_sp1.zip`
+`aem.install.packages` array, default: `cq-6.1.0-hotfix-8872-1.0.zip`
 
 Dependencies
 ------------
 
-`playlist.java`, variables used: `java_packages: ['oracle-java8-installer', 'oracle-java8-set-default']`
+`williamyeh.oracle-java`, variables used: `java_version: 8`
 
 Example Playbook
 ----------------
 ```
 - hosts: servers  
   roles:  
-    - { role: ansible-role-aem, aem.license.customer: "Acme", aem.license.key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" }
+    - { role: ronaldvaneede.aem, aem.license.customer: "Acme", aem.license.key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" }
 ```
 
 License
