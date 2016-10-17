@@ -17,7 +17,7 @@ Role Variables
 `aem.jarfile` string, default: `cq5-author-nobrowser-p4502.jar `  
 `aem.instance.name` string, default: `author`  
 `aem.instance.type` string, default: `author`  
-`aem.instance.home` string, default: `/opt/aem/author`  
+`aem.instance.base` string, default: `/opt/aem`  
 `aem.instance.user` string, default: `wcms`  
 `aem.instance.group` string, default: `online`  
 `aem.instance.port` string, default: `4502`  

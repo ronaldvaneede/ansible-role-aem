@@ -71,8 +71,6 @@
     mode: 0644
     force: no
   with_items: "{{ aem.install.packages }}"
-  notify:
-    - restart aem-{{ aem.instance.name }}
 
 - name: "Create aem-{{ aem.instance.name }} service"
   service:
