@@ -5,12 +5,15 @@ aem:
   instance:
     name: author
     type: author
-    home: /opt/aem/author
+    base: /opt/aem
     user: wcms
     group: online
     port: 4502
     nosamplecontent: true
     runmodes: author,test
+    jvm:
+      options: -server -Djava.awt.headless=true
+      memory: -Xmx1024m -XX:MaxPermSize=256M
   templates:
     license: aem/license.properties.j2
     start: aem/bin/start.j2
@@ -22,4 +25,4 @@ aem:
     key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   install:
     packages:
-      - cq-6.1.0-hotfix-8872-1.0.zip
+      #- cq-6.1.0-hotfix-8872-1.0.zip

@@ -20,7 +20,7 @@
 
 - name: Create AEM directory
   file:
-    path: "{{ aem.instance.home }}"
+    path: "{{ aem.instance.base }}/{{ aem.instance.name }}"
     owner: "{{ aem.instance.user }}"
     group: "{{ aem.instance.group }}"
     state: directory
@@ -29,14 +29,14 @@
 - name: Unpack the Jar
   become: yes
   become_user: "{{ aem.instance.user }}"
-  command: "java -jar /tmp/aem61.jar -b {{ aem.instance.home }} -unpack"
+  command: "java -jar /tmp/aem61.jar -b {{ aem.instance.base }}/{{ aem.instance.name }} -unpack"
   args:
-    creates: "{{ aem.instance.home }}/crx-quickstart/readme.txt"
+    creates: "{{ aem.instance.base }}/{{ aem.instance.name }}/crx-quickstart/readme.txt"
 
 - name: Create the AEM license file
   template:
     src: "{{ aem.templates.license }}"
-    dest: "{{ aem.instance.home }}/license.properties"
+    dest: "{{ aem.instance.base }}/{{ aem.instance.name }}/license.properties"
     owner: "{{ aem.instance.user }}"
     group: "{{ aem.instance.group }}"
     mode: 0755
@@ -47,7 +47,7 @@
 - name: Create the AEM start file
   template:
     src: "{{ aem.templates.start }}"
-    dest: "{{ aem.instance.home }}/crx-quickstart/bin/start"
+    dest: "{{ aem.instance.base }}/{{ aem.instance.name }}/crx-quickstart/bin/start"
     owner: "{{ aem.instance.user }}"
     group: "{{ aem.instance.group }}"
     mode: 0755
@@ -65,7 +65,7 @@
 - name: Install packages
   copy:
     src: "files/packages/{{ item }}"
-    dest: "{{ aem.instance.home }}/crx-quickstart/install/{{ item }}"
+    dest: "{{ aem.instance.base }}/{{ aem.instance.name }}/crx-quickstart/install/{{ item }}"
     owner: "{{ aem.instance.user }}"
     group: "{{ aem.instance.group }}"
     mode: 0644

@@ -34,9 +34,9 @@ if [ -f /etc/rc.status ]; then
 fi
 
 
-START="{{ aem.instance.home }}/crx-quickstart/bin/start"
-STOP="{{ aem.instance.home }}/crx-quickstart/bin/stop"
-STATUS="{{ aem.instance.home }}/crx-quickstart/bin/status"
+START="{{ aem.instance.base }}/{{ aem.instance.name }}/crx-quickstart/bin/start"
+STOP="{{ aem.instance.base }}/{{ aem.instance.name }}/crx-quickstart/bin/stop"
+STATUS="{{ aem.instance.base }}/{{ aem.instance.name }}/crx-quickstart/bin/status"
 PROG="aem-{{ aem.instance.name }}"
 
 RETVAL=0

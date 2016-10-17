@@ -31,7 +31,8 @@ fi
 
 # default JVM options
 if [ -z "$CQ_JVM_OPTS" ]; then
-        CQ_JVM_OPTS='-server -Xmx1024m -XX:MaxPermSize=256M -Djava.awt.headless=true'
+        #CQ_JVM_OPTS='-server -Xmx1024m -XX:MaxPermSize=256M -Djava.awt.headless=true'
+        CQ_JVM_OPTS='{{ aem.instance.jvm.options }} {{ aem.instance.jvm.memory }}'
 fi
 
 # file size limit (ulimit)

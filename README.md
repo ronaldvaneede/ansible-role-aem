@@ -21,6 +21,8 @@ Role Variables
 `aem.instance.user` string, default: `wcms`  
 `aem.instance.group` string, default: `online`  
 `aem.instance.port` string, default: `4502`  
+`aem.instance.jvm.options` string, default: `-server -Djava.awt.headless=true`  
+`aem.instance.jvm.memory`, string, default: `-Xmx1024m -XX:MaxPermSize=256M`  
 `aem.instance.nosamplecontent` boolean, default: `true`  
 `aem.instance.runmodes` string, default: `author,test`  
 `aem.license.product` string, default: `Adobe Experience Manager`  
