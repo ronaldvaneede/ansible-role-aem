@@ -1,6 +1,4 @@
 ---
-aem_role_root: /vagrant/ansible/roles/ansible-role-aem
-
 aem:
   type: author
   home: /opt/aem/author
@@ -10,7 +8,7 @@ aem:
   nosamplecontent: true
   runmodes: author,test
   instance_name: author
-  jar_location: /files/cq5-author-nobrowser-p4502.jar
+  jarfile: cq5-author-nobrowser-p4502.jar
   license:
     product: "Adobe Experience Manager"
     customer: "Acme"
@@ -18,4 +16,4 @@ aem:
     key: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   install:
     packages:
-      - aem61_sp1.zip
+      - cq-6.1.0-hotfix-8872-1.0.zip

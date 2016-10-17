@@ -152,4 +152,4 @@ galaxy_info:
     - web
 
 dependencies:
-  - { role: playlist.java, java_packages: ['oracle-java8-installer', 'oracle-java8-set-default'] }
+  - { role: williamyeh.oracle-java, java_version: 8 }

@@ -3,7 +3,7 @@
 
 - name: Copy AEM 6.1 jar file
   copy:
-    src: "{{ aem_role_root }}/{{ aem.jar_location }}"
+    src: "{{ aem.jarfile }}"
     dest: /tmp/aem61.jar
     mode: 0644
     force: no
@@ -35,7 +35,7 @@
 
 - name: Create the AEM license file
   template:
-    src: "{{ aem_role_root }}/templates/aem/license.properties.j2"
+    src: "aem/license.properties.j2"
     dest: "{{ aem.home }}/license.properties"
     owner: "{{ aem.user }}"
     group: "{{ aem.group }}"
@@ -46,7 +46,7 @@
 
 - name: Create the AEM start file
   template:
-    src: "{{ aem_role_root }}/templates/aem/bin/start.j2"
+    src: "aem/bin/start.j2"
     dest: "{{ aem.home }}/crx-quickstart/bin/start"
     owner: "{{ aem.user }}"
     group: "{{ aem.group }}"
@@ -56,7 +56,7 @@
 
 - name: Create init.d file
   template:
-    src: "{{ aem_role_root }}/templates/init.d/aem.j2"
+    src: "init.d/aem.j2"
     dest: "/etc/init.d/aem-{{ aem.instance_name }}"
     owner: root
     group: root
@@ -64,7 +64,7 @@
 
 - name: Install packages
   copy:
-    src: "{{ aem_role_root }}/files/{{ item }}"
+    src: "{{ item }}"
     dest: "{{ aem.home }}/crx-quickstart/install/{{ item }}"
     owner: "{{ aem.user }}"
     group: "{{ aem.group }}"
