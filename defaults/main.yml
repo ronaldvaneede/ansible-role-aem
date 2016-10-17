@@ -1,14 +1,20 @@
 ---
+
 aem:
-  type: author
-  home: /opt/aem/author
-  user: wcms
-  group: online
-  port: 4502
-  nosamplecontent: true
-  runmodes: author,test
-  instance_name: author
   jarfile: cq5-author-nobrowser-p4502.jar
+  instance:
+    name: author
+    type: author
+    home: /opt/aem/author
+    user: wcms
+    group: online
+    port: 4502
+    nosamplecontent: true
+    runmodes: author,test
+  templates:
+    license: aem/license.properties.j2
+    start: aem/bin/start.j2
+    init: init.d/aem.j2
   license:
     product: "Adobe Experience Manager"
     customer: "Acme"

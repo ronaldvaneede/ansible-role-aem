@@ -10,54 +10,54 @@
 
 - name: Create group
   group:
-    name: "{{ aem.group }}"
+    name: "{{ aem.instance.group }}"
     state: present
 
 - name: Create user
   user:
-    name: "{{ aem.user }}"
-    group: "{{ aem.group }}"
+    name: "{{ aem.instance.user }}"
+    group: "{{ aem.instance.group }}"
 
 - name: Create AEM directory
   file:
-    path: "{{ aem.home }}"
-    owner: "{{ aem.user }}"
-    group: "{{ aem.group }}"
+    path: "{{ aem.instance.home }}"
+    owner: "{{ aem.instance.user }}"
+    group: "{{ aem.instance.group }}"
     state: directory
     mode: 0755
 
 - name: Unpack the Jar
   become: yes
-  become_user: "{{ aem.user }}"
-  command: "java -jar /tmp/aem61.jar -b {{ aem.home }} -unpack"
+  become_user: "{{ aem.instance.user }}"
+  command: "java -jar /tmp/aem61.jar -b {{ aem.instance.home }} -unpack"
   args:
-    creates: "{{ aem.home }}/crx-quickstart/readme.txt"
+    creates: "{{ aem.instance.home }}/crx-quickstart/readme.txt"
 
 - name: Create the AEM license file
   template:
-    src: "{{ aem.license_template }}"
-    dest: "{{ aem.home }}/license.properties"
-    owner: "{{ aem.user }}"
-    group: "{{ aem.group }}"
+    src: "{{ aem.templates.license }}"
+    dest: "{{ aem.instance.home }}/license.properties"
+    owner: "{{ aem.instance.user }}"
+    group: "{{ aem.instance.group }}"
     mode: 0755
     force: no
   notify:
-    - restart aem-{{ aem.instance_name }}
+    - restart aem-{{ aem.instance.name }}
 
 - name: Create the AEM start file
   template:
-    src: "{{ aem.start_template }}"
-    dest: "{{ aem.home }}/crx-quickstart/bin/start"
-    owner: "{{ aem.user }}"
-    group: "{{ aem.group }}"
+    src: "{{ aem.templates.start }}"
+    dest: "{{ aem.instance.home }}/crx-quickstart/bin/start"
+    owner: "{{ aem.instance.user }}"
+    group: "{{ aem.instance.group }}"
     mode: 0755
   notify:
-    - restart aem-{{ aem.instance_name }}
+    - restart aem-{{ aem.instance.name }}
 
 - name: Create init.d file
   template:
-    src: "{{ aem.init_template }}"
-    dest: "/etc/init.d/aem-{{ aem.instance_name }}"
+    src: "{{ aem.templates.init }}"
+    dest: "/etc/init.d/aem-{{ aem.instance.name }}"
     owner: root
     group: root
     mode: 0755
@@ -65,18 +65,18 @@
 - name: Install packages
   copy:
     src: "files/packages/{{ item }}"
-    dest: "{{ aem.home }}/crx-quickstart/install/{{ item }}"
-    owner: "{{ aem.user }}"
-    group: "{{ aem.group }}"
+    dest: "{{ aem.instance.home }}/crx-quickstart/install/{{ item }}"
+    owner: "{{ aem.instance.user }}"
+    group: "{{ aem.instance.group }}"
     mode: 0644
     force: no
   with_items: "{{ aem.install.packages }}"
   notify:
-    - restart aem-{{ aem.instance_name }}
+    - restart aem-{{ aem.instance.name }}
 
-- name: "Create aem-{{ aem.instance_name }} service"
+- name: "Create aem-{{ aem.instance.name }} service"
   service:
-    name: "aem-{{ aem.instance_name }}"
+    name: "aem-{{ aem.instance.name }}"
     enabled: yes
     state: started
     sleep: 10

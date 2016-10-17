@@ -10,7 +10,7 @@
 
 # TCP port used for stop and status scripts
 if [ -z "$CQ_PORT" ]; then
-        CQ_PORT={{ aem.port }}
+        CQ_PORT={{ aem.instance.port }}
 fi
 
 # hostname of the interface that this server should listen to
@@ -21,7 +21,7 @@ fi
 # runmode(s)
 # will not be used if repository is already present
 if [ -z "$CQ_RUNMODE" ]; then
-        CQ_RUNMODE='{% if aem.nosamplecontent %}nosamplecontent,{% endif %}{{ aem.runmodes }}'
+        CQ_RUNMODE='{% if aem.instance.nosamplecontent %}nosamplecontent,{% endif %}{{ aem.instance.runmodes }}'
 fi
 
 # name of the jarfile

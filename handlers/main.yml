@@ -1,6 +1,6 @@
 ---
 
-- name: restart aem
+- name: restart aem-{{ aem.instance.name }}
   service:
-    name: "aem-{{ aem.instance_name }}"
+    name: "aem-{{ aem.instance.name }}"
     state: restarted
