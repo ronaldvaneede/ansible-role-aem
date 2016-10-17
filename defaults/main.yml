@@ -10,7 +10,7 @@ aem:
     group: online
     port: 4502
     nosamplecontent: true
-    runmodes: author,test
+    runmodes: test
     jvm:
       options: -server -Djava.awt.headless=true
       memory: -Xmx1024m -XX:MaxPermSize=256M

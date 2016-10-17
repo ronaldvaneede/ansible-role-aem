@@ -1,7 +1,7 @@
 ---
 # tasks file for aem
 
-- name: Copy AEM 6.1 jar file
+- name: Copy AEM jar file
   copy:
     src: "{{ aem.jarfile }}"
     dest: /tmp/aem61.jar

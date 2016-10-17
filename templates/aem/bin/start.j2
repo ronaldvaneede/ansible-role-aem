@@ -21,7 +21,7 @@ fi
 # runmode(s)
 # will not be used if repository is already present
 if [ -z "$CQ_RUNMODE" ]; then
-        CQ_RUNMODE='{% if aem.instance.nosamplecontent %}nosamplecontent,{% endif %}{{ aem.instance.runmodes }}'
+        CQ_RUNMODE='{% if aem.instance.nosamplecontent %}nosamplecontent,{% endif %}{{ aem.instance.type }},{{ aem.instance.runmodes }}'
 fi
 
 # name of the jarfile

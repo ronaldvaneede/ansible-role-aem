@@ -3,12 +3,12 @@
 Role Name
 =========
 
-An Ansible role to provision AEM 6.x instances.
+An Ansible role to provision Adobe Experience Manager (AEM) 6.x instances.
 
 Requirements
 ------------
 
-The AEM 6.1 binaries are not included and should be added by yourself.  
+The AEM 6.x binaries are not included and should be added by yourself.  
 Put them in the role's `/files` folder. You need a `cq5-author-nobrowser-p4502.jar` file with the default properties.
 
 Role Variables
@@ -24,7 +24,7 @@ Role Variables
 `aem.instance.jvm.options` string, default: `-server -Djava.awt.headless=true`  
 `aem.instance.jvm.memory`, string, default: `-Xmx1024m -XX:MaxPermSize=256M`  
 `aem.instance.nosamplecontent` boolean, default: `true`  
-`aem.instance.runmodes` string, default: `author,test`  
+`aem.instance.runmodes` string, default: `test`  
 `aem.license.product` string, default: `Adobe Experience Manager`  
 `aem.license.customer` string, default: `Acme`  
 `aem.license.version` string, default: `6.1.0.20150507`  
